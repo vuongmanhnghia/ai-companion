@@ -1,0 +1,63 @@
+# Environment variables
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+.Python
+venv/
+.venv/
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# AI/ML models (large files)
+models/*.h5
+models/*.pb
+models/*.onnx
+models/*.pkl
+models/*.joblib
+*.model
+
+# Audio uploads (runtime data)
+uploads/
+temp_audio/
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.ogg
+
+# Google Cloud credentials
+credentials/
+service-account-*.json
+google-cloud-key.json
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+.temp/

@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+    # Backend API
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        ports:
+            - "8000:8000"
+        environment:
+            - DEBUG=true
+            - REDIS_URL=redis://redis:6379
+            - DEFAULT_LANGUAGE=vi-VN
+            - GOOGLE_APPLICATION_CREDENTIALS=/ai-companion/credentials/google-cloud-key.json
+            - GOOGLE_PROJECT_ID=${GOOGLE_PROJECT_ID}
+        volumes:
+            - ./backend:/app
+            - ./models:/app/models
+            - ./credentials:/app/credentials # Mount credentials folder
+        depends_on:
+            - redis
+        restart: unless-stopped
+
+    # Frontend
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        ports:
+            - "3000:3000"
+        environment:
+            - NEXT_PUBLIC_API_URL=http://localhost:8000
+        volumes:
+            - ./frontend:/app
+            - /app/node_modules
+        depends_on:
+            - backend
+        restart: unless-stopped
+
+    # Redis for caching and session management
+    redis:
+        image: redis:7-alpine
+        ports:
+            - "6379:6379"
+        volumes:
+            - redis_data:/data
+        restart: unless-stopped
+
+    # PostgreSQL for data storage (optional)
+    postgres:
+        image: postgres:15-alpine
+        environment:
+            - POSTGRES_DB=ai_companion
+            - POSTGRES_USER=ai_user
+            - POSTGRES_PASSWORD=ai_password
+        ports:
+            - "5433:5432" # Thay đổi từ 5432:5432 sang 5433:5432
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        restart: unless-stopped
+
+volumes:
+    redis_data:
+    postgres_data:
