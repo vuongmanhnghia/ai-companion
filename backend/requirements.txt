@@ -1,0 +1,36 @@
+# ===== CORE REQUIREMENTS (Bắt buộc) =====
+# Web Framework - Latest versions as of July 2025
+fastapi==0.116.1
+uvicorn[standard]==0.32.1
+websockets==13.1
+python-multipart==0.0.17
+python-socketio==5.11.4
+
+# Data Validation & Settings - Latest Pydantic v2
+pydantic==2.10.3
+pydantic-settings==2.7.0
+
+# Speech-to-Text (Core feature) - Latest Google Cloud
+google-cloud-speech==2.28.0
+
+# Audio Processing (Lightweight) - Latest versions
+librosa==0.10.2
+soundfile==0.12.1
+numpy>=1.26.4
+
+# Infrastructure - Latest versions
+redis==5.2.0
+python-dotenv==1.0.1
+aiofiles==24.1.0
+
+# ===== OPTIONAL: Audio Classification (YAMNet) =====
+# Uncomment these lines if you want audio classification feature
+# WARNING: These packages are very large (~500MB total)
+# tensorflow>=2.18.0
+# tensorflow-hub>=0.17.0
+# scipy>=1.14.1
+
+# To enable audio classification:
+# 1. Uncomment the lines above
+# 2. Run: pip install -r requirements.txt
+# 3. The YAMNet model will be downloaded at runtime 
